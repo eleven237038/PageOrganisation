@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs & Bookmarks Sync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-title">
+        <h1>Tab &amp; Bookmark Sync</h1>
+      </div>
+      <div class="settings" id="global-settings">
+        <label><input type="checkbox" id="setting-del-tabs"> 转换后关闭标签页</label>
+        <label><input type="checkbox" id="setting-del-bks"> 展开后清理收藏夹</label>
+      </div>
+    </header>
+    
+    <div class="main-content">
+      <section class="panel tab-groups-panel">
+        <div class="panel-header">
+          <h2>当前窗口标签页组</h2>
+          <div class="header-actions">
+            <div class="sort-dropdown-container">
+              <button id="sort-groups" class="icon-btn" title="点击执行当前排序选项">⇅</button>
+              <div class="sort-menu">
+                <div class="sort-menu-header custom-switch-wrapper" title="滑动切换卡组和零散标签页前后顺序">
+                  <span class="fixed-label">前</span>
+                  <div class="draggable-switch" id="ungroup-placement-toggle">
+                    <div class="switch-segment" id="seg-1">卡组</div>
+                    <div class="switch-segment" id="seg-2">标签页</div>
+                  </div>
+                  <span class="fixed-label">后</span>
+                </div>
+                <hr class="menu-divider">
+                <button class="menu-btn active" id="sort-count">📊 数量排序</button>
+                <button class="menu-btn" id="sort-alpha">🔤 首字母排序</button>
+                <button class="menu-btn" id="sort-custom">✋ 自定义排序</button>
+              </div>
+            </div>
+            <button id="refresh-groups" class="icon-btn" title="刷新">↻</button>
+          </div>
+        </div>
+        <div id="tab-groups-list" class="list-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="panel bookmarks-panel">
+        <div class="panel-header">
+          <h2>浏览器收藏夹</h2>
+          <button id="refresh-bookmarks" class="icon-btn" title="刷新">↻</button>
+        </div>
+        <div id="bookmarks-list" class="list-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </div>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

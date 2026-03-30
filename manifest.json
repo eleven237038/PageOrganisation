@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Edge Tabs & Bookmarks Sync",
+  "version": "1.0",
+  "description": "Convert Edge Tab Groups into Bookmarks, and easily restore Bookmarks into Tab Groups.",
+  "permissions": [
+    "tabGroups",
+    "bookmarks",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tabs & Bookmarks Sync"
+  }
+}

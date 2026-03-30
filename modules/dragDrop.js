@@ -34,15 +34,15 @@ export async function handleDragEnd(e) {
   this.classList.remove('dragging');
   setDraggedElement(null);
   
-  // Real-time synchronization to browser
+  // 实时同步到浏览器
   const cards = document.querySelectorAll('#tab-groups-list .item-card');
   for (const card of cards) {
     const groupId = parseInt(card.dataset.groupId, 10);
-    // Setting index to -1 moves it sequentially to the end
+    // 将 index 设置为 -1 会将其按顺序移动到末尾
     await chrome.tabGroups.move(groupId, { index: -1 });
   }
   
-  // Enforce ungrouped placement
+  // 强制执行未分组标签页的位置
   const windowId = chrome.windows.WINDOW_ID_CURRENT;
   const ungroupFirst = isUngroupFirst();
   const ungroupedTabs = await chrome.tabs.query({ windowId, groupId: chrome.tabGroups.TAB_GROUP_ID_NONE });

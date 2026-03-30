@@ -238,7 +238,7 @@ h2 {
 }
 
 .draggable-switch::before {
-  display: none; /* Hide the white block completely */
+  display: none; /* 完全隐藏白色块 */
 }
 
 .draggable-switch.toggled::before {
@@ -252,7 +252,7 @@ h2 {
   transform: translateX(-100%);
 }
 
-/* Dragging Support */
+/* 拖拽支持 */
 .item-card.draggable {
   cursor: grab;
 }
@@ -282,7 +282,7 @@ h2 {
   align-items: center;
 }
 .drag-mode .action-btn {
-  display: none; /* Hide action button while in sort mode */
+  display: none; /* 在排序模式下隐藏操作按钮 */
 }
 
 .icon-btn {

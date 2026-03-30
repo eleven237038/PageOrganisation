@@ -40,7 +40,7 @@ export async function loadTabGroups() {
       titleText.className = 'title-text';
       const displayTitle = group.title || '未命名组';
       titleText.textContent = displayTitle;
-      titleText.title = displayTitle; // Show full title on hover
+      titleText.title = displayTitle; // 鼠标悬浮时显示完整标题
 
       titleDiv.appendChild(colorDot);
       titleDiv.appendChild(titleText);
@@ -58,9 +58,9 @@ export async function loadTabGroups() {
       actionBtn.innerHTML = '➔☆';
       actionBtn.addEventListener('click', (event) => saveGroupToBookmark(group, tabs, event));
 
-      header.appendChild(actionBtn); // Inline inside .item-header
+      header.appendChild(actionBtn); // 在 .item-header 内部显示为内联元素
 
-      // Drag handle for custom sort mode
+      // 拖拽手柄用于自定义排序模式
       const dragHandle = document.createElement('div');
       dragHandle.className = 'drag-handle';
       dragHandle.innerHTML = '≡';
@@ -69,7 +69,7 @@ export async function loadTabGroups() {
       card.appendChild(dragHandle);
       card.appendChild(header);
 
-      // Make card draggable
+      // 使卡片可拖拽
       card.draggable = true;
       card.dataset.groupId = group.id;
       card.addEventListener('dragstart', handleDragStart);

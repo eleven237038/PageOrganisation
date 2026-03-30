@@ -6,16 +6,16 @@ export function initSettings() {
   const delTabsCheck = document.getElementById('setting-del-tabs');
   const delBksCheck = document.getElementById('setting-del-bks');
 
-  // Load settings (default false)
+  // 加载设置（默认为 false）
   delTabsCheck.checked = localStorage.getItem('delTabs') === 'true';
   delBksCheck.checked = localStorage.getItem('delBks') === 'true';
 
-  // Save on change
+  // 改变时保存
   delTabsCheck.addEventListener('change', (e) => localStorage.setItem('delTabs', e.target.checked));
   delBksCheck.addEventListener('change', (e) => localStorage.setItem('delBks', e.target.checked));
 
   if (document.getElementById('ungroup-placement-toggle')) {
-    // Ungroup Placement Setting
+    // 未分组标签页位置设置
     const ungroupToggle = document.getElementById('ungroup-placement-toggle');
     if (localStorage.getItem('ungroupFirst') === 'true') {
       ungroupToggle.classList.add('toggled');

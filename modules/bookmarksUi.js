@@ -10,9 +10,9 @@ export async function loadBookmarks() {
   container.innerHTML = '<div class="empty-state">Loading...</div>';
 
   try {
-    // Get all immediate folders from Bookmarks Bar and Other Bookmarks
-    const barTree = await chrome.bookmarks.getSubTree('1'); // Bookmark Bar
-    const otherTree = await chrome.bookmarks.getSubTree('2'); // Other Bookmarks
+    // 获取书签栏和其他书签中的所有直接子文件夹
+    const barTree = await chrome.bookmarks.getSubTree('1'); // 书签栏
+    const otherTree = await chrome.bookmarks.getSubTree('2'); // 其他书签
     
     const barChildren = barTree[0]?.children || [];
     const otherChildren = otherTree[0]?.children || [];
@@ -24,12 +24,12 @@ export async function loadBookmarks() {
     }
 
     container.innerHTML = '';
-    // List all top level folders
+    // 列出所有顶层文件夹
     const folders = allTopChildren.filter(c => !c.url);
 
     for (const folder of folders) {
       const bookmarkCount = folder.children ? folder.children.filter(c => c.url).length : 0;
-      if (bookmarkCount === 0) continue; // Skip empty folders to show cleaner UI
+      if (bookmarkCount === 0) continue; // 跳过空文件夹以保持界面整洁
       
       const card = document.createElement('div');
       card.className = 'item-card';
@@ -40,7 +40,7 @@ export async function loadBookmarks() {
       const titleDiv = document.createElement('div');
       titleDiv.className = 'item-title';
       
-      // Attempt to parse out group color
+      // 尝试解析并提取出可能的标签组颜色标识
       let displayTitle = folder.title;
       let colorHint = null;
       const colorMatch = folder.title.match(/\[([a-z]+)\]/);
@@ -57,7 +57,7 @@ export async function loadBookmarks() {
       const titleText = document.createElement('span');
       titleText.className = 'title-text';
       titleText.textContent = displayTitle;
-      titleText.title = displayTitle; // Show full title on hover
+      titleText.title = displayTitle; // 鼠标悬浮时显示完整标题
 
       titleDiv.appendChild(starIcon);
       titleDiv.appendChild(titleText);
@@ -72,10 +72,10 @@ export async function loadBookmarks() {
       const actionBtn = document.createElement('button');
       actionBtn.className = 'action-btn';
       actionBtn.title = '展开为新组';
-      actionBtn.innerHTML = '➔⚪';
+      actionBtn.innerHTML = '<span style="display:flex; align-items:center; gap:4px;"><span>➔</span><span class="color-dot" style="background-color:#bdc1c6; transition:transform 0.2s ease;"></span></span>';
       actionBtn.addEventListener('click', (event) => openFolderAsGroup(folder, colorHint, event));
 
-      header.appendChild(actionBtn); // Inline inside .item-header
+      header.appendChild(actionBtn); // 在 .item-header 内部显示为内联元素
 
       card.appendChild(header);
       container.appendChild(card);

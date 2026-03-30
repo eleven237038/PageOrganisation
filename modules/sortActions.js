@@ -20,7 +20,7 @@ export function setSortMode(mode) {
 }
 
 export async function executeSort(event) {
-  if (state.currentSortMode === 'custom') return; // Custom is manual drag
+  if (state.currentSortMode === 'custom') return; // 自定义模式为手动拖拽
   
   const btn = event.target;
   const originalText = btn.innerHTML;
@@ -29,13 +29,13 @@ export async function executeSort(event) {
   try {
     const windowId = chrome.windows.WINDOW_ID_CURRENT;
 
-    // Handle ungrouped tabs placement if toggle is activated before sorting groups
+    // 如果在排序标签组之前启用了开关，则处理未分组标签页的位置
     const ungroupFirst = isUngroupFirst();
     const ungroupedTabs = await chrome.tabs.query({ windowId, groupId: chrome.tabGroups.TAB_GROUP_ID_NONE });
     const ungroupedTabIds = ungroupedTabs.map(t => t.id);
     
     if (ungroupedTabIds.length > 0 && ungroupFirst) {
-      // Move to the very beginning BEFORE moving groups to the end
+      // 在将标签组移动到末尾之前，移动到最前面
       await chrome.tabs.move(ungroupedTabIds, { index: 0 });
     }
 
@@ -59,11 +59,11 @@ export async function executeSort(event) {
     }
 
     if (ungroupedTabIds.length > 0 && !ungroupFirst) {
-      // Move to the very end AFTER groups
+      // 在标签组之后移动到最后面
       await chrome.tabs.move(ungroupedTabIds, { index: -1 });
     }
 
-    loadTabGroups(); // Refresh UI
+    loadTabGroups(); // 刷新界面
     btn.innerHTML = '✔️';
 
   } catch (error) {

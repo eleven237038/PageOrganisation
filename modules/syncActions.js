@@ -13,10 +13,10 @@ export async function saveGroupToBookmark(group, tabs, event) {
   btn.classList.add('success');
 
   try {
-    // Save to the Bookmarks Bar directly (id: '1', or '2' for Other Bookmarks)
+    // 直接保存到书签栏 (id: '1', 或 '2' 代表其他书签)
     const parentFolderId = '1';
     
-    // Use exactly the group's name, no timestamp or color wrapper
+    // 直接使用标签组名称，不包含时间戳或颜色包裹符
     const title = group.title || '未命名组';
 
     const groupFolder = await chrome.bookmarks.create({
@@ -24,7 +24,7 @@ export async function saveGroupToBookmark(group, tabs, event) {
       title: title
     });
 
-    // Save tabs
+    // 保存标签页
     for (const tab of tabs) {
       if (tab.url) {
         await chrome.bookmarks.create({
@@ -40,8 +40,8 @@ export async function saveGroupToBookmark(group, tabs, event) {
       await chrome.tabs.remove(tabIds);
     }
 
-    // Success feedback
-    loadBookmarks(); // update the right panel
+    // 成功反馈
+    loadBookmarks(); // 更新右侧面板
     btn.innerHTML = '✔️ 已保存';
     
   } catch (error) {
@@ -67,7 +67,7 @@ export async function openFolderAsGroup(folder, extractedColor, event) {
 
   try {
     const tabIds = [];
-    // Important: Edge respects active:false, but bulk layout might take MS
+    // 重要：Edge 浏览器遵循 active:false 参数，但批量渲染布局可能需要一定时间
     for (const bm of bookmarks) {
       const tab = await chrome.tabs.create({ url: bm.url, active: false });
       tabIds.push(tab.id);
@@ -75,7 +75,7 @@ export async function openFolderAsGroup(folder, extractedColor, event) {
 
     const groupId = await chrome.tabs.group({ tabIds });
     
-    // Pure title is exactly the folder name now
+    // 纯净标题现在就是文件夹的确切名称
     let pureTitle = folder.title;
     
     await chrome.tabGroups.update(groupId, {
@@ -87,13 +87,13 @@ export async function openFolderAsGroup(folder, extractedColor, event) {
       await chrome.bookmarks.removeTree(folder.id);
     }
 
-    // Make the first tab active
+    // 激活第一个标签页
     if (tabIds.length > 0) {
       chrome.tabs.update(tabIds[0], { active: true });
     }
 
-    loadTabGroups(); // Update the left panel
-    loadBookmarks(); // Update the right panel because we might have deleted a folder
+    loadTabGroups(); // 更新左侧面板
+    loadBookmarks(); // 更新右侧面板，因为我们可能已将其删除
     btn.innerHTML = '✔️ 展开成功';
 
   } catch (error) {

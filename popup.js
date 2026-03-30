@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('sort-alpha').addEventListener('click', () => setSortMode('alpha'));
     document.getElementById('sort-custom').addEventListener('click', () => setSortMode('custom'));
 
-    // Sort Menu Hover Delay Logic
+    // 排序菜单悬浮延迟逻辑
     const sortDropdownContainer = document.querySelector('.sort-dropdown-container');
     let sortMenuTimeout;
     
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sortDropdownContainer.addEventListener('mouseleave', () => {
       sortMenuTimeout = setTimeout(() => {
         sortDropdownContainer.classList.remove('show-menu');
-      }, 300); // 0.3s delay
+      }, 300); // 0.3秒延迟
     });
   }
 

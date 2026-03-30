@@ -3,28 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Tabs & Bookmarks Sync</title>
+  <!-- 引入样式文件 -->
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
+    
+    <!-- ========================================== -->
+    <!-- 头部模块：包含标题和全局设置                 -->
+    <!-- ========================================== -->
     <header>
       <div class="header-title">
         <h1>Tab &amp; Bookmark Sync</h1>
       </div>
+      <!-- 全局操作设置 -->
       <div class="settings" id="global-settings">
         <label><input type="checkbox" id="setting-del-tabs"> 转换后关闭标签页</label>
         <label><input type="checkbox" id="setting-del-bks"> 展开后清理收藏夹</label>
       </div>
     </header>
     
+    <!-- ========================================== -->
+    <!-- 主体内容区域：包含标签页组模块和收藏夹模块   -->
+    <!-- ========================================== -->
     <div class="main-content">
+      
+      <!-- ========================================== -->
+      <!-- 模块 1: 当前窗口标签页组面板                 -->
+      <!-- ========================================== -->
       <section class="panel tab-groups-panel">
+        
+        <!-- 面板头部：标题与操作按钮 -->
         <div class="panel-header">
           <h2>当前窗口标签页组</h2>
+          
           <div class="header-actions">
+            <!-- 排序下拉菜单容器 -->
             <div class="sort-dropdown-container">
               <button id="sort-groups" class="icon-btn" title="点击执行当前排序选项">⇅</button>
+              
               <div class="sort-menu">
+                <!-- 拖拽切换卡组与零散标签页先后顺序 -->
                 <div class="sort-menu-header custom-switch-wrapper" title="滑动切换卡组和零散标签页前后顺序">
                   <span class="fixed-label">前</span>
                   <div class="draggable-switch" id="ungroup-placement-toggle">
@@ -33,33 +52,51 @@
                   </div>
                   <span class="fixed-label">后</span>
                 </div>
+                
                 <hr class="menu-divider">
+                
+                <!-- 排序选项按钮 -->
                 <button class="menu-btn active" id="sort-count">📊 数量排序</button>
                 <button class="menu-btn" id="sort-alpha">🔤 首字母排序</button>
                 <button class="menu-btn" id="sort-custom">✋ 自定义排序</button>
               </div>
             </div>
+            
+            <!-- 刷新标签页组按钮 -->
             <button id="refresh-groups" class="icon-btn" title="刷新">↻</button>
           </div>
         </div>
+        
+        <!-- 标签页组列表容器 (由 js 动态生成填充) -->
         <div id="tab-groups-list" class="list-container">
-          <!-- Dynamically populated -->
+          <!-- 动态内容... -->
         </div>
       </section>
 
+      <!-- 面板之间的垂直分割线 -->
       <div class="divider"></div>
 
+      <!-- ========================================== -->
+      <!-- 模块 2: 浏览器收藏夹面板                     -->
+      <!-- ========================================== -->
       <section class="panel bookmarks-panel">
+        
+        <!-- 面板头部：标题与刷新按钮 -->
         <div class="panel-header">
           <h2>浏览器收藏夹</h2>
           <button id="refresh-bookmarks" class="icon-btn" title="刷新">↻</button>
         </div>
+        
+        <!-- 收藏夹列表容器 (由 js 动态生成填充) -->
         <div id="bookmarks-list" class="list-container">
-          <!-- Dynamically populated -->
+          <!-- 动态内容... -->
         </div>
       </section>
+      
     </div>
   </div>
+  
+  <!-- 引入逻辑脚本：Type 指定为 module，支持 ES6 模块化 -->
   <script type="module" src="popup.js"></script>
 </body>
 </html>
